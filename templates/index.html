@@ -15,7 +15,7 @@
         console.log("Connecting to WebSocket server at:", window.location.hostname);
 
         // Connect to WebSocket using WSS for secure connection (HTTPS)
-        const socket = io.connect('wss://' + window.location.hostname + ':443');  // Use WSS (secure WebSocket)
+        const socket = io.connect('wss://' + window.location.hostname);  // Use WSS (secure WebSocket)
 
         // Event listener for button click to send message
         document.getElementById('sendMessageBtn').onclick = function() {
