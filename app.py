@@ -17,4 +17,5 @@ def handle_message(msg):
 
 # Run the Flask app with SocketIO support
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))  # Render will set the PORT environment variable
+    socketio.run(app, host='0.0.0.0', port=port)
