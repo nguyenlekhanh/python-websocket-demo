@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.0.0/dist/socket.io.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
-    <h1>WebSocket Client</h1>
-    <button id="sendBtn">Send Message</button>
-    <div id="response"></div>
+    <h1>Flask-SocketIO WebSocket Test</h1>
+    <button id="sendMessageBtn">Send Message</button>
 
     <script>
-        // Connect to the WebSocket server
-        const socket = io.connect('http://' + window.location.hostname + ':5000');
+        // Log the hostname to ensure we're connecting to the correct server
+        console.log("Connecting to WebSocket server at:", window.location.hostname);
 
-        // Send a message when the button is clicked
-        document.getElementById('sendBtn').addEventListener('click', () => {
-            socket.send('Hello, Server!');
-        });
+        // Connect to WebSocket using WSS for secure connection (HTTPS)
+        const socket = io.connect('wss://' + window.location.hostname + ':443');  // Use WSS (secure WebSocket)
 
-        // Handle the response from the server
-        socket.on('response', function(data) {
-            document.getElementById('response').innerText = data.data;
+        // Event listener for button click to send message
+        document.getElementById('sendMessageBtn').onclick = function() {
+            socket.send("Hello from client!");
+        };
+
+        // Listen for messages from the server
+        socket.on('message', function(data) {
+            console.log('Received from server:', data);
+            alert("Message from server: " + data);
         });
     </script>
 </body>

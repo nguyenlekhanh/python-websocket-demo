@@ -1,23 +1,28 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
 import os
+from flask import Flask
+from flask_socketio import SocketIO
 
+# Create Flask app and initialize SocketIO
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")  # Allow all origins, adjust for production
 
-# Route for the main page
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "Hello, Flask-SocketIO!"
 
-# WebSocket event handler for new connections
+# Event: Handle a simple WebSocket message
 @socketio.on('message')
-def handle_message(msg):
-    print('Received message: ' + msg)
-    emit('response', {'data': 'Message received!'})
+def handle_message(message):
+    print(f"Received message: {message}")
+    socketio.send("Message received!")
 
-# Run the Flask app with SocketIO support
+# Running the Flask-SocketIO app
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Render will set the PORT environment variable
-    print(f"Server is running on port: {port}")
-    socketio.run(app, host='0.0.0.0', port=port)
+    # Use the environment variable PORT or default to 5000
+    port = int(os.environ.get('PORT', 5000))
+
+    # Print the server port for debugging
+    print(f"Server running on port: {port}")
+    
+    # Run the app (bind to all available IP addresses and use the dynamic port)
+    socketio.run(app, host='0.0.0.0', port=port, ssl_context='adhoc')  # For SSL (https)
