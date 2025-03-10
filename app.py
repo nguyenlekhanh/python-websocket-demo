@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 # Create Flask app and initialize SocketIO
