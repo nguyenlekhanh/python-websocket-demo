@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.0.0/dist/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <button id="sendBtn">Send Message</button>
+    <div id="response"></div>
+
+    <script>
+        // Connect to the WebSocket server
+        const socket = io.connect('http://' + window.location.hostname + ':5000');
+
+        // Send a message when the button is clicked
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            socket.send('Hello, Server!');
+        });
+
+        // Handle the response from the server
+        socket.on('response', function(data) {
+            document.getElementById('response').innerText = data.data;
+        });
+    </script>
+</body>
+</html>
