@@ -1,9 +1,13 @@
 import os
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from flask_cors import CORS
 
 # Create Flask app and initialize SocketIO
 app = Flask(__name__)
+
+CORS(app,resources={r"/*":{"origins":"*"}})
+
 socketio = SocketIO(app, cors_allowed_origins="*")  # Allow all origins, adjust for production
 
 @app.route('/')
