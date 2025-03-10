@@ -8,7 +8,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")  # Allow all origins, adjust 
 
 @app.route('/')
 def index():
-    return "Hello, Flask-SocketIO!"
+    #return "Hello, Flask-SocketIO!"
+    return render_template('index.html')
 
 # Event: Handle a simple WebSocket message
 @socketio.on('message')
