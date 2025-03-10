@@ -1,7 +1,10 @@
 import os
+import eventlet
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from flask_cors import CORS
+
+eventlet.monkey_patch()  # Patch standard library for eventlet compatibility
 
 # Create Flask app and initialize SocketIO
 app = Flask(__name__)
