@@ -22,7 +22,7 @@ def index():
 @socketio.on('message')
 def handle_message(message):
     print(f"Received message: {message}")
-    socketio.send("Message received!")
+    socketio.emit('response', 'Message received!')
 
 # Running the Flask-SocketIO app
 if __name__ == '__main__':
