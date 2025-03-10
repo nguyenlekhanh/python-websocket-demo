@@ -26,4 +26,4 @@ if __name__ == '__main__':
     print(f"Server running on port: {port}")
     
     # Run the app (bind to all available IP addresses and use the dynamic port)
-    socketio.run(app, host='0.0.0.0', port=port)  # For SSL (https)
+    socketio.run(app, host='0.0.0.0', port=port, ssl_context='adhoc')  # For SSL (https)
