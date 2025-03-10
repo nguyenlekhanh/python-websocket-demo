@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
+import os
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -18,4 +19,5 @@ def handle_message(msg):
 # Run the Flask app with SocketIO support
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Render will set the PORT environment variable
+    print(f"Server is running on port: {port}")
     socketio.run(app, host='0.0.0.0', port=port)
